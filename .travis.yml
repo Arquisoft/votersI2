@@ -1,1 +1,4 @@
 language: java
+
+notifications:
+  slack: arquisofti2b:5f14wMgpnF6luTNIoBZopzFq#travis
