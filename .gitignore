@@ -57,3 +57,9 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+
+
+# IntelliJ ignores
+
+.idea/
+votersI2.iml
