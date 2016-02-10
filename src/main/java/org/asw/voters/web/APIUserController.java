@@ -1,18 +1,26 @@
 package org.asw.voters.web;
 
 import org.asw.voters.domain.User;
+import org.asw.voters.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequestMapping("/rest")
 @RestController
 public class APIUserController {
-    private static final String BASE_API_PATH = "/rest";
 
-    @RequestMapping(value = BASE_API_PATH + "/user", method = RequestMethod.POST)
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(value = "/user", method = RequestMethod.POST,
+                    produces = "application/json")
+    @Transactional(readOnly = true)
     public User show(@RequestParam("login") String email,
                      @RequestParam("password") String password) {
-        return new User(email);
+        return this.userService.getUser(email);
     }
 }
