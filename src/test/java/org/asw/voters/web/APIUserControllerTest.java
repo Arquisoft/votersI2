@@ -17,6 +17,8 @@ import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,31 +26,29 @@ import org.springframework.web.client.RestTemplate;
 @WebAppConfiguration
 @IntegrationTest({"server.port=0"})
 public class APIUserControllerTest {
-//
-//    @Value("${local.server.port}")
-//    private int port;
-//
-//    private URL base;
-//    private RestTemplate template;
-//
-//    @Before
-//    public void setUp() throws Exception {
-//        this.base = new URL("http://localhost:" + port + "/");
-//        template = new TestRestTemplate();
-//    }
-//
-//    @Test
-//    public void getLanding() throws Exception {
-//        String userURI = base.toString() + "/user";
-//        ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
-//        assertThat(response.getBody(), equalTo("User Management Service"));
-//    }
-//
-//    @Test
-//    public void getUser() throws Exception {
-//        String userURI = base.toString() + "/user";
-//        ResponseEntity<String> response = template.getForEntity(userURI, String.class);
-//        User expected = new User("pepe",0);
-//    }
+
+    @Value("${local.server.port}")
+    private int port;
+
+    private URL base;
+    private RestTemplate template;
+
+    @Before
+    public void setUp() throws Exception {
+        this.base = new URL("http://localhost:" + port + "/rest");
+        template = new TestRestTemplate();
+    }
+
+    @Test
+    public void getUser() throws Exception {
+        String userURI = base.toString() + "/user";
+        MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
+        data.add("email", "example@example.org");
+
+        ResponseEntity<String> response = template.postForEntity(userURI,
+                                                                 data,
+                                                                 String.class);
+        User expected = new User("example@example.org");
+    }
 
 }
