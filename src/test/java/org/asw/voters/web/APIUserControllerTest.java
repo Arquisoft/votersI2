@@ -7,9 +7,11 @@ import java.net.URL;
 
 import org.asw.voters.Application;
 import org.asw.voters.domain.User;
+import org.asw.voters.service.user.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -33,6 +35,9 @@ public class APIUserControllerTest {
     private URL base;
     private RestTemplate template;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Before
     public void setUp() throws Exception {
         this.base = new URL("http://localhost:" + port + "/rest");
@@ -41,14 +46,18 @@ public class APIUserControllerTest {
 
     @Test
     public void getUser() throws Exception {
+        String email = "example@example.org";
+        User expected = new User("Frank", "71869923B", email);
+        userRepository.save(expected);
+
         String userURI = base.toString() + "/user";
         MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
-        data.add("email", "example@example.org");
+        data.add("email", email);
+        data.add("password", "pass");
 
         ResponseEntity<String> response = template.postForEntity(userURI,
                                                                  data,
                                                                  String.class);
-        User expected = new User("example@example.org");
     }
 
 }
