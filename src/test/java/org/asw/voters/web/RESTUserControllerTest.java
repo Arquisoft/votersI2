@@ -58,6 +58,7 @@ public class RESTUserControllerTest {
         ResponseEntity<String> response = template.postForEntity(userURI,
                                                                  data,
                                                                  String.class);
+        userRepository.delete(expected);
     }
 
 }
