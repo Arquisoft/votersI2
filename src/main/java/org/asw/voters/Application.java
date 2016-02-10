@@ -1,4 +1,4 @@
-package hello;
+package org.asw.voters;
 
 
 import org.springframework.boot.SpringApplication;

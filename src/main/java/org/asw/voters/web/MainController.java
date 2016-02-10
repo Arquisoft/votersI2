@@ -1,6 +1,7 @@
-package hello;
+package org.asw.voters.web;
 
 
+import org.asw.voters.domain.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
     @RequestMapping("/user")
-    public UserInfo user() {
-        return new UserInfo("pepe",0);
+    public User user() {
+        return new User("pepe");
     }
 
     @RequestMapping("/")
