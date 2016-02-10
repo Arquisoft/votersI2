@@ -34,6 +34,7 @@ public class User implements Serializable {
         this.nif = nif;
         this.email = email;
         this.pollingStationCode = "31323";
+        this.password = "plain";
     }
 
     public String getName() {

@@ -27,7 +27,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest({"server.port=0"})
-public class APIUserControllerTest {
+public class RESTUserControllerTest {
 
     @Value("${local.server.port}")
     private int port;
@@ -58,6 +58,7 @@ public class APIUserControllerTest {
         ResponseEntity<String> response = template.postForEntity(userURI,
                                                                  data,
                                                                  String.class);
+        userRepository.delete(expected);
     }
 
 }

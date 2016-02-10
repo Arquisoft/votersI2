@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/rest")
 @RestController
-public class APIUserController {
+public class RESTUserController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.POST,
-                    produces = "application/json")
+            produces = "application/json")
     @Transactional(readOnly = true)
     public User show(@RequestParam("login") String email,
                      @RequestParam("password") String password) {
-        return this.userService.getUser(email);
+        return this.userService.findByEmailAndPassword(email, password);
     }
 }
