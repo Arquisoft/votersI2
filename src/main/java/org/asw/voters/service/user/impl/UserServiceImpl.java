@@ -3,6 +3,7 @@ package org.asw.voters.service.user.impl;
 import org.asw.voters.domain.User;
 import org.asw.voters.service.user.UserRepository;
 import org.asw.voters.service.user.UserService;
+import org.asw.voters.service.user.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public User findByEmailAndPassword(String email, String password) {
+        User user = this.userRepository.findByEmailAndPassword(email, password);
+        if (user == null) {
+            throw new UserNotFoundException();
+        }
+        return user;
     }
 
     @Override

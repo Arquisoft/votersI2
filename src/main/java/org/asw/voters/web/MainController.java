@@ -1,7 +1,6 @@
 package org.asw.voters.web;
 
 
-import org.asw.voters.domain.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
