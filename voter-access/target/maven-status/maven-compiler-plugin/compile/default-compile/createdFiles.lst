@@ -1,0 +1,8 @@
+org/asw/voters/service/user/exception/UserNotFoundException.class
+org/asw/voters/web/RESTUserController.class
+org/asw/voters/web/MainController.class
+org/asw/voters/service/user/UserRepository.class
+org/asw/voters/service/user/UserService.class
+org/asw/voters/Application.class
+org/asw/voters/domain/User.class
+org/asw/voters/service/user/impl/UserServiceImpl.class
