@@ -13,6 +13,7 @@ jdk:
 
 notifications:
   slack: arquisofti2b:5f14wMgpnF6luTNIoBZopzFq#travis
+  email: false
 
 services:
   - mysql
