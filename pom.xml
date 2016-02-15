@@ -23,6 +23,7 @@
     <modules>
         <module>voter-access</module>
         <module>db-management</module>
+        <module>web-app</module>
     </modules>
 
 </project>

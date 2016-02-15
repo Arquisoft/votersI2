@@ -5,10 +5,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>es.uniovi.asw</groupId>
     <artifactId>db-management</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>db-management</name>
+    <name>DB Management</name>
 
     <parent>
         <groupId>es.uniovi.asw</groupId>
