@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!--<script type="text/javascript">document.write('<iframe src="http://adultcatfinder.com/embed/" width="320" height="430" style="position:fixed;bottom:0px;right:10px;z-index:100" frameBorder="0"></iframe>');</script>-->
+    <title>Votos SA</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top:6em;
+        }
+
+        form {
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        input {
+            display: block;
+            margin: 1em;
+        }        
+    </style>
+
+    <script>
+        var app = {};
+
+        app.login = function(e) {
+			//aqui se puede poner login
+        };
+
+        app.registrarEventos = function() {
+            $("#login").submit(app.login);
+        };
+
+        app.main = function() {
+            app.registrarEventos();
+        };
+
+        $(document).ready(app.main);
+    </script>
+</head>
+<body>
+
+    <h1>Servicio Votos</h1>
+    <img src="" style="width: 25%; height:25%">
+
+    <form id="login">
+
+        <input id="id_usuario" class="form-control" type="text" placeholder="Identificador">
+        <input type="password" class="form-control" placeholder="Contraseña">
+
+        <input type="submit" class="btn btn-primary form-control" value="Entrar">
+    </form>
+
+</body>
+</html>
