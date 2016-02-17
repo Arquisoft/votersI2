@@ -31,8 +31,9 @@ public class RESTVoterController {
                     headers = "Accept=application/json",
                     produces = "application/json")
     @Transactional(readOnly = true)
-    public boolean changePassword(@RequestParam("oldPassword") String oldPassword,
+    public void changePassword(@RequestParam("login") String email,
+                                  @RequestParam("oldPassword") String oldPassword,
                                   @RequestParam("newPassword") String newPassword){
-        return this.changePassword(oldPassword,newPassword);
+        this.voterService.changePassword(email,oldPassword,newPassword);
     }
 }
