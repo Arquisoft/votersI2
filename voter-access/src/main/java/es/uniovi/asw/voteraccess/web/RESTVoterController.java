@@ -25,4 +25,14 @@ public class RESTVoterController {
                       @RequestParam("password") String password) {
         return this.voterService.findByEmailAndPassword(email, password);
     }
+
+    @RequestMapping(value = "/changepassword",
+                    method = RequestMethod.POST,
+                    headers = "Accept=application/json",
+                    produces = "application/json")
+    @Transactional(readOnly = true)
+    public boolean changePassword(@RequestParam("oldPassword") String oldPassword,
+                                  @RequestParam("newPassword") String newPassword){
+        return this.changePassword(oldPassword,newPassword);
+    }
 }

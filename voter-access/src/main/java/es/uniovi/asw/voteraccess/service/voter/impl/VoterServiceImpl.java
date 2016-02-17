@@ -21,4 +21,10 @@ public class VoterServiceImpl implements VoterService {
             throw new VoterNotFoundException();
         }
     }
+
+    @Override
+    public void changePassword(String email, String oldPassword, String newPassword) {
+        Voter voter = findByEmailAndPassword(email, oldPassword);
+        voter.changePassword(newPassword);
+    }
 }
