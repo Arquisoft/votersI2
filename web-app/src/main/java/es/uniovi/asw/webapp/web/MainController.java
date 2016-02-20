@@ -29,6 +29,12 @@ public class MainController {
     	return "login";
     }
 
+	/**
+	 * Displays the voter view
+	 * @param user   the user data
+	 * @param model  Spring model
+	 * @return       the voters view
+	 */
 	@RequestMapping(value="/user", method=RequestMethod.POST)
     public String login(@ModelAttribute User user, Model model) {
 		// We have the user data in "user"
