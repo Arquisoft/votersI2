@@ -19,4 +19,5 @@ services:
   - mysql
 
 before_script:
+  - sh -c "mysqladmin -u root password root"
   - sh -c "mysql -u root -proot -e 'create database IF NOT EXISTS voters;'"
