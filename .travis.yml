@@ -19,4 +19,4 @@ services:
   - mysql
 
 before_script:
-  - sh -c "mysql -u root -e 'create database IF NOT EXISTS voters;'"
+  - sh -c "mysql -u root -proot -e 'create database IF NOT EXISTS voters;'"
