@@ -1,13 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-    <script>
-
-    </script>
-    <title>Mi perfil</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <title>Your Polling Station</title>
     <style>
         html {
             padding: 7em;
@@ -21,37 +17,17 @@
             text-align:center;
             margin-bottom: 1em;
         }
-
-        .reservable {
-            cursor: pointer;
-        }
-
-        .reservada {
-            cursor: default;
-            background-color: coral;
-        }
-
-        .reservada_por_socio {
-            background-color: cadetblue;
-            cursor: pointer;
-        }
-
-        .right {
-            float:right;
-            margin-right:3em;
-        }
-
     </style>
 </head>
 <body>
     <nav class="table table-hover">
-        <p><a class="btn btn-primary btn-lg" onclick="window.location.href='changePassword.html'">Cambiar Contraseña</a></p>
-        <p><a class="btn btn-danger btn-lg right" onclick="window.location.href='home.html'">Salir</a></p>
+        <p><a class="btn btn-primary btn-lg">Change Password</a></p>
+        <p><a class="btn btn-danger btn-lg right" href="/">Logout</a></p>
     </nav>
-    <h1>Pepe Perez</h1>
-	<h2>Your Polling Station</h2>
+    <h1 class="page-header" th:text="'Hello ' + ${voter.name}"></h1>
+	<h2>This is your Polling Station</h2>
 	<div class="jumbotron center">
-		<h3 style="text-align: center">00546</h3>
+		<h3 style="text-align: center" th:text="'Number: ' + ${voter.pollingStationCode}"></h3>
 	</div>
 </body>
 </html>
