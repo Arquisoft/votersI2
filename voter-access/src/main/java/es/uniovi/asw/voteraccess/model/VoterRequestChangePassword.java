@@ -1,14 +1,23 @@
 package es.uniovi.asw.voteraccess.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by Fabio on 20/02/2016.
  */
+
+@XmlRootElement(name = "user")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class VoterRequestChangePassword {
 
+    @XmlElement
     private String login;
+    @XmlElement
     private String oldPassword;
+    @XmlElement
     private String newPassword;
 
     public VoterRequestChangePassword()
