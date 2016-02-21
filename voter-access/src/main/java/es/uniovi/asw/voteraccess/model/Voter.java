@@ -1,5 +1,8 @@
 package es.uniovi.asw.voteraccess.model;
 
+import es.uniovi.asw.dbmanagement.business.VoterService;
+import es.uniovi.asw.dbmanagement.infrastructure.ServicesFactory;
+
 public class Voter {
     private es.uniovi.asw.dbmanagement.domain.Voter voter = null;
 
@@ -46,6 +49,11 @@ public class Voter {
     public void setPassword(String password) {
         voter.setPassword(password);
     }
+
+    public void changePassword(String newPassword){
+        VoterService v = ServicesFactory.createVoterService();
+        v.updatePassword(voter,newPassword);
+    };
 
     @Override
     public boolean equals(Object o) {
