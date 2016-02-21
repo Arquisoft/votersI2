@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <title>Voting Service</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top:6em;
+        }
+
+        form {
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        input {
+            display: block;
+            margin: 1em;
+        }
+        
+        div {
+        	padding-left:1em;
+        }        
+    </style>
+</head>
+<body>
+	<div th:unless="${param.error == null}" class="alert alert-danger">
+  		<p>This user is not in the DB</p>
+	</div>
+    <h1 class="page-header">Voting Service</h1>
+    <!--<img src="/img/home.png"/>-->
+
+    <form action="#" th:action="@{/user}" th:object="${user}" method="post">
+        <input id="id_usuario" class="form-control" type="text" placeholder="Identifier" th:field="*{id}"/>
+        <input type="password" class="form-control" placeholder="Password" th:field="*{password}"/>
+
+        <input type="submit" class="btn btn-primary form-control" value="Submit"/>
+    </form>
+</body>
+</html>

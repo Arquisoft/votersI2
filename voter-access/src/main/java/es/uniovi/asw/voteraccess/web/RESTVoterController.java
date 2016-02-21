@@ -15,6 +15,11 @@ public class RESTVoterController {
     @Autowired
     private VoterService voterService;
 
+    /**
+     * API rest method to return the data of a voter
+     * @param voterRequestGet the data of the voter (login and password)
+     * @return a 200 OK with the voter if successfully logged (else it throws an exception with error 404)
+     */
     @RequestMapping(value = {"/user.json", "/user"},
             method = RequestMethod.POST,
             consumes = {"application/json", "application/xml"},
@@ -24,6 +29,8 @@ public class RESTVoterController {
         return this.voterService.findByEmailAndPassword(voterRequestGet.getLogin(), voterRequestGet.getPassword());
     }
 
+   /* TODO no es capaz a responder con xml
+    @RequestMapping(value = "",
     @RequestMapping(value = "/user.xml",
             method = RequestMethod.POST,
             consumes = {"application/xml", "application/json"},
@@ -33,8 +40,13 @@ public class RESTVoterController {
     @ResponseBody
     Voter getVoterInfoXML(@RequestBody VoterRequestGet voterRequestGet) {
         return this.voterService.findByEmailAndPassword(voterRequestGet.getLogin(), voterRequestGet.getPassword());
-    }
+    }*/
 
+    /**
+     * API rest method to change the password of a voter
+     * If changed successfully it returns a 200 OK else exception with a 404
+     * @param voterRequestChangePassword the data of the voter (login, oldPassword and newPassword)
+     */
     @RequestMapping(value = {"/changepassword"},
             method = RequestMethod.POST,
             consumes = {"application/json", "application/xml"},

@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Created by Fabio on 20/02/2016.
+ * Model used to pass the login, oldpassword and new password to the changepassword function
  */
 
 @XmlRootElement(name = "user")
