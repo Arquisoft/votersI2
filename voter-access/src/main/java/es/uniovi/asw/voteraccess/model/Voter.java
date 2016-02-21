@@ -3,7 +3,16 @@ package es.uniovi.asw.voteraccess.model;
 import es.uniovi.asw.dbmanagement.business.VoterService;
 import es.uniovi.asw.dbmanagement.infrastructure.ServicesFactory;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "voter")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Voter {
+
+    @XmlElement
     private es.uniovi.asw.dbmanagement.domain.Voter voter = null;
 
     public Voter(es.uniovi.asw.dbmanagement.domain.Voter voter) {
@@ -53,7 +62,7 @@ public class Voter {
     public void changePassword(String newPassword){
         VoterService v = ServicesFactory.createVoterService();
         v.updatePassword(voter,newPassword);
-    };
+    }
 
     @Override
     public boolean equals(Object o) {
