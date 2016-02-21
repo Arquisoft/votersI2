@@ -13,9 +13,11 @@ jdk:
 
 notifications:
   slack: arquisofti2b:5f14wMgpnF6luTNIoBZopzFq#travis
+  email: false
 
 services:
   - mysql
 
 before_script:
-  - sh -c "mysql -u root -e 'create database IF NOT EXISTS voters;'"
+  - sh -c "mysqladmin -u root password root"
+  - sh -c "mysql -u root -proot -e 'create database IF NOT EXISTS voters;'"

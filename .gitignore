@@ -6,7 +6,7 @@
 *.ear
 .classpath
 .settings/*
-/target
+target/
 
 .metadata
 bin/
@@ -63,3 +63,6 @@ local.properties
 
 .idea/
 votersI2.iml
+db-management.iml
+voter-access.iml
+web-app.iml
