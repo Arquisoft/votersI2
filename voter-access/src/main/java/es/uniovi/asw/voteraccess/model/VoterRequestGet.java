@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by Fabio on 20/02/2016.
+ * Model used to pass the login and password to the get user function
  */
 public class VoterRequestGet {
 
