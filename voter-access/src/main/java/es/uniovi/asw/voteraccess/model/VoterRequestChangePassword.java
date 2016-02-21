@@ -3,7 +3,7 @@ package es.uniovi.asw.voteraccess.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
- * Created by Fabio on 20/02/2016.
+ * Model used to pass the login, oldpassword and new password to the changepassword function
  */
 public class VoterRequestChangePassword {
 
