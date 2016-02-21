@@ -42,11 +42,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest("server.port:1")
+//@IntegrationTest("server.port:0")
 public class RESTVoterControllerTest {
 
-    @Value("${local.server.port}")
-    private int port;
+    //@Value("${local.server.port}")
+    //private int port;
 
     @Autowired
     private WebApplicationContext context;
@@ -62,7 +62,7 @@ public class RESTVoterControllerTest {
     @Before
     public void setUp() throws Exception {
         this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-        this.base = new URL("http://localhost:" + port + "/rest"); //algo raro pasa con el port asi que pongo 8080 a mano
+        //this.base = new URL("http://localhost:" + port + "/rest"); //algo raro pasa con el port asi que pongo 8080 a mano
         //template = new TestRestTemplate();
         setUpDB();
     }
