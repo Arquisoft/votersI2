@@ -70,4 +70,12 @@ public class RESTVoterController {
         return this.voterService.updateVoter(voter);
     }
 
+    @RequestMapping(value = {"/deleteVoter"},
+            method = RequestMethod.POST,
+            consumes = {"application/json", "application/xml"},
+            produces = "application/json")
+    @Transactional(readOnly = true)
+    public Voter deleteVoter(@RequestBody Voter voter) {
+        return this.voterService.deleteVoter(voter);
+    }
 }

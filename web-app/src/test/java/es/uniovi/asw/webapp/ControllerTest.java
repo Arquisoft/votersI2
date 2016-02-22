@@ -1,6 +1,7 @@
 package es.uniovi.asw.webapp;
 
 import es.uniovi.asw.webapp.model.VoterDTO;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,6 +46,13 @@ public class ControllerTest {
     public void setUp() throws Exception {
         this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
         setUpDB();
+    }
+
+    @After
+    public void tearDown() {
+        RestTemplate restTemplate = new RestTemplate();
+        String uri = API + "/deleteVoter";
+        restTemplate.postForObject(uri, voter, VoterDTO.class);
     }
 
     private void setUpDB() {
@@ -100,11 +108,13 @@ public class ControllerTest {
 
     @Test
     public void getCorrectPassword() throws Exception {
+        String newPassword = "newPass";
         mvc.perform(post("/changePassword")
                 .param("login", voter.getEmail())
                 .param("password", voter.getPassword())
-                .param("newPassword", "newPass"))
+                .param("newPassword", newPassword))
                 .andExpect(model().attributeExists("success"));
+        voter.setPassword(newPassword);
     }
 
 }

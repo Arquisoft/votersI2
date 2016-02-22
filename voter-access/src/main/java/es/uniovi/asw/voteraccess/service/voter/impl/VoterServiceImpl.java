@@ -34,4 +34,11 @@ public class VoterServiceImpl implements VoterService {
                 .createVoterService()
                 .updateVoter(voter.getBaseVoter()));
     }
+
+    @Override
+    public Voter deleteVoter(Voter voter) {
+        voter = findByEmailAndPassword(voter.getEmail(), voter.getPassword());
+        ServicesFactory.createVoterService().deleteVoter(voter.getBaseVoter());
+        return voter;
+    }
 }
