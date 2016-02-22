@@ -11,3 +11,4 @@ Authors
 * Roberto Fernandezz Diaz UO237068
 * Pablo Menendez Barrientos UO237542
 * Fabio Martinez Gonzalez UO238539
+* Andrea Vega Campos UO231259
