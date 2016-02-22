@@ -49,12 +49,6 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>es.uniovi.asw</groupId>
-            <artifactId>voter-access</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-
     </dependencies>
 
 
