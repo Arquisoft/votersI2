@@ -30,14 +30,14 @@
     </style>
 </head>
 <body>
-	<div th:unless="${param.error == null}" class="alert alert-danger">
+	<div th:unless="${error == null}" class="alert alert-danger">
   		<p>This user is not in the DB</p>
 	</div>
     <h1 class="page-header">Voting Service</h1>
     <!--<img src="/img/home.png"/>-->
 
-    <form action="#" th:action="@{/user}" th:object="${user}" method="post">
-        <input id="id_usuario" class="form-control" type="text" placeholder="Identifier" th:field="*{id}"/>
+    <form action="#" th:action="@{/user}" th:object="${voter}" method="post">
+        <input id="id_usuario" class="form-control" type="text" placeholder="Identifier" th:field="*{email}"/>
         <input type="password" class="form-control" placeholder="Password" th:field="*{password}"/>
 
         <input type="submit" class="btn btn-primary form-control" value="Submit"/>
