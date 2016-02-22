@@ -1,5 +1,7 @@
 package es.uniovi.asw.webapp;
 
+import es.uniovi.asw.webapp.model.VoterDTO;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,111 +11,100 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.hamcrest.Matchers.hasXPath;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-//@IntegrationTest("server.port:0")
+@IntegrationTest("server.port:0")
 public class ControllerTest {
 
-//    @Value("${local.server.port}")
-//    private int port;
+    @Value("${voters.api}")
+    private String API;
+
+    @Value("${local.server.port}")
+    private int port;
 
     @Autowired
     private WebApplicationContext context;
 
     private MockMvc mvc;
 
-    /*
-        @Before
-        public void setUp() throws Exception {
-            this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-            setUpDB();
-        }
+    private VoterDTO voter;
 
-        @After
-        public void cleanup() throws Exception {
-            VoterService vs = ServicesFactory.createVoterService();
-            vs.deleteVoter(voter);
-        }
 
-        private void setUpDB() {
-             String email = "test@test.es";
-             String password = "test";
-             voter = new Voter("Test", "71866423B", email);
-             voter.setPassword(password);
+    @Before
+    public void setUp() throws Exception {
+        this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+        setUpDB();
+    }
 
-             VoterService vs = ServicesFactory.createVoterService();
-             vs.updateVoter(voter);
-        }
+    private void setUpDB() {
+        voter = new VoterDTO("test@test.es", "Test", "test", "71866423B",
+                "31313");
 
-        @Test
-        public void getHome() throws Exception {
-            mvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(content().node(hasXPath("boolean(//div)", equalTo("false")))) //Error message is not shown
-                .andExpect(content().node(hasXPath("//input[@id='id_usuario']")));
-        }
-
-        @Test
-        public void getVoter() throws Exception {
-             mvc.perform(post("/user")
-                     .param("id", "test@test.es")
-                     .param("password", "test"))
-                 .andExpect(status().isOk())
-                 .andExpect(content().node(hasXPath("//h3/text()", equalTo("Number: 31323"))));
-        }
-
-        @Test
-        public void getWrongVoterRedirection() throws Exception {
-             mvc.perform(post("/user")
-                     .param("id", "test@test.es")
-                     .param("password", "wrongPass"))
-                 .andExpect(status().is3xxRedirection())
-                 .andExpect(redirectedUrl("/?error=notFound"));
-        }
-
-        @Test
-        public void getErrorHome() throws Exception {
-            mvc.perform(get("/?error=notFound"))
-                .andExpect(status().isOk())
-                .andExpect(content().node(hasXPath("boolean(//div)", equalTo("true")))); //Error message is shown
-        }
-
-        @Test
-        public void getWrongPassword() throws Exception {
-            mvc.perform(post("/changePassword")
-                    .param("login", "test@test.es")
-                    .param("oldPassword", "wrongPass")
-                    .param("newPassword", "newPass"))
-                    .andExpect(status().is3xxRedirection())
-                    .andExpect(redirectedUrl("/changePassword?error=notFound"));
-        }
-
-        @Test
-        public void getWrongUser() throws Exception {
-            mvc.perform(post("/changePassword")
-                    .param("login", "testinmalo@test.es")
-                    .param("oldPassword", "test")
-                    .param("newPassword", "newPass"))
-                    .andExpect(status().is3xxRedirection())
-                    .andExpect(redirectedUrl("/changePassword?error=notFound"));
-        }
-
-        public void getCorrectPassword() throws Exception {
-            mvc.perform(post("/changePassword")
-                    .param("login", "test@test.es")
-                    .param("oldPassword", "test")
-                    .param("newPassword", "newPass"))
-                    .andExpect(status().is3xxRedirection())
-                    .andExpect(redirectedUrl("/changePassword?success=true"));
-        }
-    */
+        RestTemplate restTemplate = new RestTemplate();
+        String uri = API + "/createVoter";
+        voter = restTemplate.postForObject(uri, voter, VoterDTO.class);
+    }
 
     @Test
-    public void testNothing() {
+    public void getHome() throws Exception {
+        mvc.perform(get("/"))
+                .andExpect(status().isOk());
+    }
 
+    @Test
+    public void getVoter() throws Exception {
+        mvc.perform(post("/user")
+                .param("login", voter.getEmail())
+                .param("password", voter.getPassword()))
+                .andExpect(status().isOk())
+                .andExpect(content().node(hasXPath("//h3/text()",
+                        equalTo("Number: " + voter.getPollingStationCode()))));
+    }
+
+    @Test
+    public void getWrongVoter() throws Exception {
+        mvc.perform(post("/user")
+                .param("login", voter.getEmail())
+                .param("password", "wrongPass"))
+                .andExpect(model().attributeExists("error"));
+    }
+
+    @Test
+    public void getWrongPassword() throws Exception {
+        mvc.perform(post("/changePassword")
+                .param("login", voter.getEmail())
+                .param("oldPassword", "wrongPass")
+                .param("newPassword", "newPass"))
+                .andExpect(model().attributeExists("error"));
+    }
+
+    @Test
+    public void getWrongUser() throws Exception {
+        mvc.perform(post("/changePassword")
+                .param("login", "testinmalo@test.es")
+                .param("password", voter.getPassword())
+                .param("newPassword", "newPass"))
+                .andExpect(model().attributeExists("error"));
+    }
+
+    @Test
+    public void getCorrectPassword() throws Exception {
+        mvc.perform(post("/changePassword")
+                .param("login", voter.getEmail())
+                .param("password", voter.getPassword())
+                .param("newPassword", "newPass"))
+                .andExpect(model().attributeExists("success"));
     }
 
 }

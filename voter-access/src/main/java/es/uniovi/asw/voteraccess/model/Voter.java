@@ -6,15 +6,17 @@ import es.uniovi.asw.dbmanagement.infrastructure.ServicesFactory;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "voter")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Voter {
 
-    @XmlElement
     private es.uniovi.asw.dbmanagement.domain.Voter voter = null;
+
+    public Voter() {
+        voter = new es.uniovi.asw.dbmanagement.domain.Voter();
+    }
 
     public Voter(es.uniovi.asw.dbmanagement.domain.Voter voter) {
         this.voter = voter;
@@ -36,12 +38,20 @@ public class Voter {
         voter.setNif(nif);
     }
 
+    public String getLogin() {
+        return getEmail();
+    }
+
+    public void setLogin(String email) {
+        setEmail(email);
+    }
+
     public String getEmail() {
         return voter.getEmail();
     }
 
     public void setEmail(String email) {
-        voter.setName(email);
+        voter.setEmail(email);
     }
 
     public String getPollingStationCode() {
@@ -60,9 +70,9 @@ public class Voter {
         voter.setPassword(password);
     }
 
-    public void changePassword(String newPassword){
+    public void changePassword(String newPassword) {
         VoterService v = ServicesFactory.createVoterService();
-        v.updatePassword(voter,newPassword);
+        v.updatePassword(voter, newPassword);
     }
 
     @JsonIgnore
