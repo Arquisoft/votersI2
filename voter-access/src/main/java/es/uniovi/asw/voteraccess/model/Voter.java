@@ -64,6 +64,10 @@ public class Voter {
         v.updatePassword(voter,newPassword);
     }
 
+    public es.uniovi.asw.dbmanagement.domain.Voter getBaseVoter() {
+        return voter;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
