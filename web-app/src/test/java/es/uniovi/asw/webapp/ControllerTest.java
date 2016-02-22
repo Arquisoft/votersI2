@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.exceptions.ExceptionIncludingMockitoWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
@@ -91,4 +92,35 @@ public class ControllerTest {
     		.andExpect(status().isOk())
     		.andExpect(content().node(hasXPath("boolean(//div)", equalTo("true")))); //Error message is shown
 	}
+
+	@Test
+	public void getWrongPassword() throws Exception {
+		mvc.perform(post("/changePassword")
+				.param("login", "test@test.es")
+				.param("oldPassword", "wrongPass")
+				.param("newPassword", "newPass"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/changePassword?error=notFound"));
+	}
+
+	@Test
+	public void getWrongUser() throws Exception {
+		mvc.perform(post("/changePassword")
+				.param("login", "testinmalo@test.es")
+				.param("oldPassword", "test")
+				.param("newPassword", "newPass"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/changePassword?error=notFound"));
+	}
+
+	public void getCorrectPassword() throws Exception {
+		mvc.perform(post("/changePassword")
+				.param("login", "test@test.es")
+				.param("oldPassword", "test")
+				.param("newPassword", "newPass"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/changePassword?success=true"));
+	}
+
+
 }

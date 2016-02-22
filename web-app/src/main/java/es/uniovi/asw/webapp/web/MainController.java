@@ -1,5 +1,6 @@
 package es.uniovi.asw.webapp.web;
 
+import es.uniovi.asw.webapp.model.UserChangePassword;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,10 +25,18 @@ public class MainController {
 	 * @return 		 The voting homepage
 	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)
-    public String landing(Model model) {
+	public String landing(Model model) {
 		model.addAttribute("user", new User());
-    	return "login";
-    }
+		return "login";
+	}
+
+	@RequestMapping(value="/changePassword", method=RequestMethod.GET)
+	public String changePasswordGet(Model model) {
+
+		model.addAttribute("userChangePassword", new UserChangePassword());
+		return "changePassword";
+	}
+
 
 	/**
 	 * Displays the voter view
@@ -50,6 +59,25 @@ public class MainController {
 		model.addAttribute("voter", voter);
     	return "main";
     }
-	
-	
+
+	@RequestMapping(value="/changePassword", method=RequestMethod.POST)
+	public String changePassword(@ModelAttribute UserChangePassword user, Model model) {
+
+		try {
+			//check correct data
+			this.voterService.findByEmailAndPassword(user.getLogin(), user.getOldPassword());
+			//change password
+			this.voterService.changePassword(user.getLogin(), user.getOldPassword(), user.getNewPassword());
+
+		} catch (VoterNotFoundException e) {
+
+			//If the user is not on DB, redirect to main
+			model.addAttribute("error",true);
+			model.addAttribute("success", false);
+			return "redirect:/changePassword?error=notFound";	//cambiar a la propia pagina con el mensaje de error
+		}
+		model.addAttribute("error",false);
+		model.addAttribute("success", true);	//show success message
+		return "redirect:/changePassword?success=true";		//cambiar a la propia pagina con el mensaje de exito
+	}
 }
