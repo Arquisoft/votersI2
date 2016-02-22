@@ -10,11 +10,13 @@ import org.springframework.web.client.RestTemplate;
 @Service("voterService")
 public class VoterServiceImpl implements VoterService {
 
+    private static String API = "https://localhost:8443/rest";
+
     @Override
     public VoterDTO find(VoterDTO voter) {
         try {
             RestTemplate restTemplate = new RestTemplate();
-            String uri = "http://localhost:8080/rest/user";
+            String uri = API + "/user";
             voter = restTemplate.postForObject(uri, voter, VoterDTO.class);
         } catch (HttpClientErrorException e) {
             throw new VoterNotFoundException();
@@ -26,7 +28,7 @@ public class VoterServiceImpl implements VoterService {
     public VoterDTO changePassword(VoterDTO voter) {
         try {
             RestTemplate restTemplate = new RestTemplate();
-            String uri = "http://localhost:8080/rest/changePassword";
+            String uri = API + "/changePassword";
             voter = restTemplate.postForObject(uri, voter, VoterDTO.class);
         } catch (HttpClientErrorException e) {
             throw new VoterNotFoundException();
