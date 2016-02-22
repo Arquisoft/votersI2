@@ -27,4 +27,18 @@ public class VoterServiceImpl implements VoterService {
         Voter voter = findByEmailAndPassword(email, oldPassword);
         voter.changePassword(newPassword);
     }
+
+    @Override
+    public Voter updateVoter(Voter voter) {
+        return new Voter(ServicesFactory
+                .createVoterService()
+                .updateVoter(voter.getBaseVoter()));
+    }
+
+    @Override
+    public Voter deleteVoter(Voter voter) {
+        voter = findByEmailAndPassword(voter.getEmail(), voter.getPassword());
+        ServicesFactory.createVoterService().deleteVoter(voter.getBaseVoter());
+        return voter;
+    }
 }

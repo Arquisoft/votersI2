@@ -23,6 +23,18 @@ public class VoterDTO {
         this.newPassword = newPassword;
     }
 
+    public VoterDTO(String email,
+                    String name,
+                    String password,
+                    String nif,
+                    String pollingStationCode) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.nif = nif;
+        this.pollingStationCode = pollingStationCode;
+    }
+
     public String getEmail() {
         return email;
     }

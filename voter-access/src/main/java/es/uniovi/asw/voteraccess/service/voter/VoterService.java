@@ -5,5 +5,10 @@ import es.uniovi.asw.voteraccess.model.Voter;
 public interface VoterService {
 
     Voter findByEmailAndPassword(String email, String password);
+
     void changePassword(String email, String oldPassword, String newPassword);
+
+    Voter updateVoter(Voter voter);
+
+    Voter deleteVoter(Voter voter);
 }
