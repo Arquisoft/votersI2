@@ -4,6 +4,8 @@ Voters
 
 Voters Subsystem
 
+<a href="https://github.com/Arquisoft/votersI2/wiki/Set-up-the-environment">How to set up the enviroment</a>
+
 Authors
 =======
 
