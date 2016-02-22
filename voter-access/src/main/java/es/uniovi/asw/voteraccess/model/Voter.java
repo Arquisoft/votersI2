@@ -1,5 +1,6 @@
 package es.uniovi.asw.voteraccess.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.uniovi.asw.dbmanagement.business.VoterService;
 import es.uniovi.asw.dbmanagement.infrastructure.ServicesFactory;
 
@@ -64,6 +65,7 @@ public class Voter {
         v.updatePassword(voter,newPassword);
     }
 
+    @JsonIgnore
     public es.uniovi.asw.dbmanagement.domain.Voter getBaseVoter() {
         return voter;
     }
