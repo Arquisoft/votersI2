@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/main">
+<head>
+    <title>Voting Service</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h1>Voting Service</h1>
+    <div th:unless="${error == null}" class="alert alert-danger">
+        <p>This user is not in the DB</p>
+    </div>
+    <form action="#" th:action="@{/user}" th:object="${voter}" method="post">
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Email" th:field="*{email}"/>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" th:field="*{password}"/>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary form-control" value="Submit"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

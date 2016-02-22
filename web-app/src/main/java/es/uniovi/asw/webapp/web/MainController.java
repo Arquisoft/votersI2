@@ -25,7 +25,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String landing(Model model) {
         model.addAttribute("voter", new VoterDTO());
-        return "login";
+        return "voter/login";
     }
 
     /**
@@ -40,18 +40,18 @@ public class MainController {
         try {
             voter = this.voterService.find(voter);
             model.addAttribute("voter", voter);
-            return "main";
+            return "voter/main";
         } catch (VoterNotFoundException e) {
             model.addAttribute("error", true);
             model.addAttribute("voter", voter);
-            return "login";
+            return "voter/login";
         }
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
     public String changePasswordGet(Model model) {
         model.addAttribute("voter", new VoterDTO());
-        return "changePassword";
+        return "voter/changePassword";
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
@@ -63,7 +63,7 @@ public class MainController {
         } catch (VoterNotFoundException e) {
             model.addAttribute("error", true);
         }
-        return "changePassword";
+        return "voter/changePassword";
     }
 
     @ExceptionHandler(VoterNotFoundException.class)

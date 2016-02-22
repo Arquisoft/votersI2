@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/main">
+<head>
+    <title>Your Polling Station</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1 class="page-header" th:text="'Hello ' + ${voter.name}"></h1>
+	<h2>This is your Polling Station</h2>
+	<div class="jumbotron center">
+		<h3 style="text-align: center" th:text="'Number: ' + ${voter.pollingStationCode}"></h3>
+	</div>
+</div>
+</body>
+</html>
