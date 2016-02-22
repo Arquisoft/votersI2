@@ -18,6 +18,11 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.connection.autocommit" value="false"/>
+            <!-- Travis does not support ssl by default
+            <property name="hibernate.connection.verifyServerCertificate"
+                      value="false" />
+            <property name="hibernate.connection.requireSSL" value="true" />
+            -->
         </properties>
     </persistence-unit>
 </persistence>

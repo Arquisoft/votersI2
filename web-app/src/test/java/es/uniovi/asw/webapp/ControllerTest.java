@@ -14,11 +14,11 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest("server.port:0")
+//@IntegrationTest("server.port:0")
 public class ControllerTest {
 
-    @Value("${local.server.port}")
-    private int port;
+//    @Value("${local.server.port}")
+//    private int port;
 
     @Autowired
     private WebApplicationContext context;
