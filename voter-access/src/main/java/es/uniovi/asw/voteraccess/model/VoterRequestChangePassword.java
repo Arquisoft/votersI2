@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Model used to pass the login, oldpassword and new password to the changepassword function
  */
 
-@XmlRootElement(name = "user")
+@XmlRootElement(name = "/user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class VoterRequestChangePassword {
 

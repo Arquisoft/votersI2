@@ -124,7 +124,7 @@ public class RESTVoterControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(voterRequestChangePassword);
 
-        mvc.perform(post("http://localhost:8080/rest/changepassword").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().isOk());
+        mvc.perform(post("http://localhost:8080/rest/changePassword").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().isOk());
 
         //check that new password works properly
         VoterRequestGet voterRequestGet = new VoterRequestGet();
@@ -153,7 +153,7 @@ public class RESTVoterControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(voterRequestChangePassword);
 
-        mvc.perform(post("http://localhost:8080/rest/changepassword").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().is4xxClientError());
+        mvc.perform(post("http://localhost:8080/rest/changePassword").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().is4xxClientError());
 
         //check that new password does not work
         VoterRequestGet voterRequestGet = new VoterRequestGet();

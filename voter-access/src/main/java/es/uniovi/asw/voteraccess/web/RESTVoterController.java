@@ -47,7 +47,7 @@ public class RESTVoterController {
      * If changed successfully it returns a 200 OK else exception with a 404
      * @param voterRequestChangePassword the data of the voter (login, oldPassword and newPassword)
      */
-    @RequestMapping(value = {"/changepassword"},
+    @RequestMapping(value = {"/changePassword"},
             method = RequestMethod.POST,
             consumes = {"application/json", "application/xml"},
             produces = "application/json")
