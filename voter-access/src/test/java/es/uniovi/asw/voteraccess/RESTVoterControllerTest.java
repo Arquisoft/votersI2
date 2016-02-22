@@ -55,7 +55,7 @@ public class RESTVoterControllerTest {
 
     private Voter voter;
 
-    private URL base;
+    private String base = "https://localhost:8443/rest";
     //private RestTemplate template;
 
 
@@ -94,7 +94,10 @@ public class RESTVoterControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(voterRequestGet);
 
-        mvc.perform(post("http://localhost:8080/rest/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().isOk());
+        mvc.perform(post(base+"/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -108,7 +111,10 @@ public class RESTVoterControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(voterRequestGet);
 
-        mvc.perform(post("http://localhost:8080/rest/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().is4xxClientError());
+        mvc.perform(post(base+"/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status().is4xxClientError());
     }
 
     @Test
@@ -124,20 +130,28 @@ public class RESTVoterControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(voterRequestChangePassword);
 
-        mvc.perform(post("http://localhost:8080/rest/changePassword").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().isOk());
+        mvc.perform(post(base+"/changePassword")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status().isOk());
 
         //check that new password works properly
         VoterRequestGet voterRequestGet = new VoterRequestGet();
         voterRequestGet.setLogin("test@test.es");
         voterRequestGet.setPassword("changedpassword");
         requestJson=ow.writeValueAsString(voterRequestGet);
-        mvc.perform(post("http://localhost:8080/rest/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().isOk());
+        mvc.perform(post(base+"/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(requestJson)).andExpect(status().isOk());
 
         //check that old password does not work
         voterRequestGet.setPassword("test"); //previous password
         requestJson=ow.writeValueAsString(voterRequestGet);
 
-        mvc.perform(post("http://localhost:8080/rest/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().is4xxClientError());
+        mvc.perform(post(base+"/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status().is4xxClientError());
     }
 
     @Test
@@ -153,19 +167,29 @@ public class RESTVoterControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(voterRequestChangePassword);
 
-        mvc.perform(post("http://localhost:8080/rest/changePassword").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().is4xxClientError());
+        mvc.perform(post(base+"changePassword")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status().is4xxClientError());
 
         //check that new password does not work
         VoterRequestGet voterRequestGet = new VoterRequestGet();
         voterRequestGet.setLogin("test@test.es");
         voterRequestGet.setPassword("changedpassword");
         requestJson=ow.writeValueAsString(voterRequestGet);
-        mvc.perform(post("http://localhost:8080/rest/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().is4xxClientError());
+        mvc.perform(post(base +"/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status()
+                .is4xxClientError());
 
         //check that old password works
         voterRequestGet.setPassword("test"); //previous password
         requestJson=ow.writeValueAsString(voterRequestGet);
 
-        mvc.perform(post("http://localhost:8080/rest/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(requestJson)).andExpect(status().isOk());
+        mvc.perform(post(base+"/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(status().isOk());
     }
 }
