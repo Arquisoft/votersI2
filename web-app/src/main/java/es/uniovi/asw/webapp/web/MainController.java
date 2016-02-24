@@ -48,12 +48,24 @@ public class MainController {
         }
     }
 
+    /**
+     * Displays the change password view
+     *
+     * @param model Spring model
+     * @return the change password view
+     */
     @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
     public String changePasswordGet(Model model) {
         model.addAttribute("voter", new VoterDTO());
         return "voter/changePassword";
     }
 
+    /**
+     * Displays the change password view with a success or error message
+     *
+     * @param model Spring model
+     * @return the change password view
+     */
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public String changePassword(@ModelAttribute VoterDTO voter, Model model) {
         model.addAttribute("voter", voter);
