@@ -69,6 +69,12 @@ public class ControllerTest {
     }
 
     @Test
+    public void getChangePassword() throws Exception{
+        mvc.perform(get("/changePassword"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void getVoter() throws Exception {
         mvc.perform(post("/user")
                 .param("login", voter.getEmail())
@@ -113,6 +119,15 @@ public class ControllerTest {
                 .param("newPassword", newPassword))
                 .andExpect(model().attributeExists("success"));
         voter.setPassword(newPassword);
+    }
+
+    @Test
+    public void getWrongUserAndPassword() throws Exception{
+        mvc.perform(post("/changePassword")
+                .param("login", "testinmalo@test.es")
+                .param("password", "malpass")
+                .param("newPassword", "newPass"))
+                .andExpect(model().attributeExists("error"));
     }
 
 }
