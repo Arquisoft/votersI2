@@ -1,0 +1,16 @@
+SAME NAME in documentation and code
+a system -> package a
+component -> package and class I/O, maybe façade
+
+code and documentation up to date and represented in both sides
+
+explain how the attributes are solved in the final presentation
+
+-case tool for keep updating not easy to use, better by hand
+
+
+|----------------|              |----------------|  
+|				 |				|				 |
+|	HIBERNATE	 |--------------|    	DB	     |
+|				 |				|				 |
+|----------------|				|----------------|
