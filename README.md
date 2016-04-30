@@ -10,7 +10,7 @@ In order to ease the build and run phase docker compose is used, you just need t
 ``` bash
 $ docker-compose up
 ```
-And the service will be started in the port `8080` of your docker machine.
+And the service will be started in the port `8888` of your docker machine.
 
 Authors
 =======
