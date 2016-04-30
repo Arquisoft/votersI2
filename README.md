@@ -4,7 +4,13 @@ Voters
 
 Voters Subsystem
 
-<a href="https://github.com/Arquisoft/votersI2/wiki/Set-up-the-environment">How to set up the enviroment</a>
+Build and run
+=============
+In order to ease the build and run phase docker compose is used, you just need to run:
+``` bash
+$ docker-compose up
+```
+And the service will be started in the port `8080` of your docker machine.
 
 Authors
 =======
