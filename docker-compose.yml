@@ -13,7 +13,7 @@ services:
 
   voter-access:
     container_name: "voter-access"
-    build: .
+    image: emibloque/votersi2
     ports:
       - "8443:8443"
     depends_on:
@@ -24,7 +24,7 @@ services:
       - DB_PASSWORD=secret
 
   web-app:
-    build: ./web-app
+    image: emibloque/votersi2-web
     ports:
       - "8888:8888"
     depends_on:
